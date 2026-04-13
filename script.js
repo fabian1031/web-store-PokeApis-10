@@ -18,8 +18,8 @@ function searchPokemon() {
     })
     .then(function (data) {
       informacionPokemon = {
-        imagen: data.sprites.front_default,
         nombre: data.name,
+        imagen: data.sprites.front_default
       };
       console.log(data);
       console.log(data.sprites.front_default);
@@ -29,8 +29,7 @@ function searchPokemon() {
       alert("¡Error! Pokémon no encontrado");
     });
 }
-function saveFavorite(informacionPokemon) {
-    console.log("");
+function saveFavorite() {
     
   if (informacionPokemon === null) {
     console.log("no hay datos guardatos");
@@ -41,10 +40,11 @@ function saveFavorite(informacionPokemon) {
 
     return listaFavoritos;
   } else {
-    localStorage.setItem("nombre", JSON.stringify(informacionPokemon));
+    localStorage.setItem("pokemon", JSON.stringify(informacionPokemon));
+
   }
 }
 
-botonGuardar.addEventListener("click", function () {
+botonGuardar.addEventListener("click", function() {
   saveFavorite();
 });

@@ -4,7 +4,6 @@ let informacion = document.getElementById("valorInformacion");
 let botonGuardar = document.getElementById("valorGuardar");
 let favoristos = document.getElementById("favoritosCargue");
 
-<<<<<<< HEAD
 
 // async function obtenerUsuarios() {
 //   try {
@@ -23,7 +22,7 @@ let favoristos = document.getElementById("favoritosCargue");
 // }
 
 //obtenerUsuarios();
-=======
+
 botonBuscar.addEventListener("click", function () {
   searchPokemon();
 });
@@ -42,5 +41,4 @@ function searchPokemon() {
     });
 }
 
->>>>>>> main
 

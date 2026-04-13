@@ -1,2 +1,2 @@
 # web-store-PokeApis-10
-# primer comentario
+# luis rodriguez, angie gamboa, fabian beltran, angie beltran, octavio franco

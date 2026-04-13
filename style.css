@@ -1,0 +1,83 @@
+body {
+  background-color: #1a1a2e;
+  color: #ffffff;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+main {
+  background-color: #2d1b4e;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+#inputPokemon {
+  width: 70%;
+  padding: 12px;
+  border: 2px solid #7b2cbf;
+  border-radius: 8px;
+  background: #1a1a2e;
+  color: #fff;
+  outline: none;
+  transition: border 0.3s;
+}
+
+#inputPokemon:focus {
+  border-color: #ffde00;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: transform 0.2s;
+  margin: 5px;
+}
+
+#buscarValor {
+  background-color: #ffde00;
+  color: #2d1b4e;
+}
+
+#valorGuardar {
+  background-color: #9d4edd;
+  color: white;
+  width: 100%;
+  margin-top: 15px;
+}
+
+button:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+#valorInformacion {
+  min-height: 100px;
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px dashed #ffde00;
+  border-radius: 10px;
+  background: rgba(255, 222, 0, 0.05);
+}
+
+section {
+  margin-top: 30px;
+  border-top: 2px solid #5a189a;
+  padding-top: 20px;
+}
+
+#favoritosCargue {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}

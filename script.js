@@ -4,11 +4,11 @@ let informacion = document.getElementById("valorInformacion");
 let botonGuardar = document.getElementById("valorGuardar");
 let favoristos = document.getElementById("favoritosCargue");
 
+let informacionPokemon = null;
+
 botonBuscar.addEventListener("click", function () {
   searchPokemon();
 });
-
-let informacionPokemon = null;
 
 function searchPokemon() {
   let traerPokemon = input.value.trim().toLocaleLowerCase();
@@ -21,30 +21,30 @@ function searchPokemon() {
         imagen: data.sprites.front_default,
         nombre: data.name,
       };
-      console.log(data);
-      console.log(data.sprites.front_default);
-      informacion.innerHTML = `<p>${informacionPokemon.nombre}</p> <img src="${informacionPokemon.imagen}" alt=""></img>`;
+      informacion.innerHTML = `<p>${informacionPokemon.nombre}</p><img src="${informacionPokemon.imagen}" alt="" />`;
     })
     .catch(function (error) {
       alert("¡Error! Pokémon no encontrado");
     });
 }
-function saveFavorite(informacionPokemon) {
-    console.log("");
-    
-  if (informacionPokemon === null) {
-    console.log("no hay datos guardatos");
-  }
-  if (localStorage.length == 0) {
-    let listaFavoritos = [];
-    listaFavoritos.push(informacionPokemon);
 
-    return listaFavoritos;
-  } else {
-    localStorage.setItem("nombre", JSON.stringify(informacionPokemon));
+function saveFavorite(pokemon) {
+  if (pokemon === null) {
+    alert("Primero busca un pokémon");
+    return;
   }
+  let listaFavoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+  listaFavoritos.push(pokemon);
+  localStorage.setItem("favoritos", JSON.stringify(listaFavoritos));
+  renderFavoritos(listaFavoritos);
 }
-
 botonGuardar.addEventListener("click", function () {
-  saveFavorite();
+  saveFavorite(informacionPokemon);
 });
+
+function renderFavoritos(lista) {
+  favoristos.innerHTML = "";
+  lista.forEach(function (pokemon) {
+    favoristos.innerHTML += `<p>${pokemon.nombre}</p><img src="${pokemon.imagen}" alt="" />`;
+  });
+}

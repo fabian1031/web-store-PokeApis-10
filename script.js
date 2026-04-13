@@ -21,4 +21,5 @@ let favoristos = document.getElementById("favoritosCargue");
 //   }
 // }
 
-obtenerUsuarios();
+//obtenerUsuarios();
+

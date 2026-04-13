@@ -29,7 +29,9 @@ function searchPokemon() {
       alert("¡Error! Pokémon no encontrado");
     });
 }
-function saveFavorite() {
+function saveFavorite(informacionPokemon) {
+    console.log("");
+    
   if (informacionPokemon === null) {
     console.log("no hay datos guardatos");
   }
@@ -44,6 +46,5 @@ function saveFavorite() {
 }
 
 botonGuardar.addEventListener("click", function () {
-  console.log("click");
   saveFavorite();
 });

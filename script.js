@@ -2,7 +2,7 @@ let input = document.getElementById("inputPokemon");
 let botonBuscar = document.getElementById("buscarValor");
 let informacion = document.getElementById("valorInformacion");
 let botonGuardar = document.getElementById("valorGuardar");
-let favoristos = document.getElementById("favoritosCargue");
+let divFavoritos = document.getElementById("favoritos");
 
 
 // async function obtenerUsuarios() {
@@ -27,43 +27,65 @@ botonBuscar.addEventListener("click", function () {
   searchPokemon();
 });
 
-let informacionPokemon = null;
+let pokemon = {};
+let listaFavoritos = null
 
 function searchPokemon() {
-  let traerPokemon = input.value.trim().toLocaleLowerCase();
-  fetch(`https://pokeapi.co/api/v2/pokemon/${traerPokemon}`)
+  let nombrePokemon = input.value.trim().toLocaleLowerCase();
+  fetch(`https://pokeapi.co/api/v2/pokemon/${nombrePokemon}`)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      informacionPokemon = {
-        nombre: data.name,
-        imagen: data.sprites.front_default
-      };
-      console.log(data);
-      console.log(data.sprites.front_default);
-      informacion.innerHTML = `<p>${informacionPokemon.nombre}</p> <img src="${informacionPokemon.imagen}" alt=""></img>`;
+
+      pokemon.nombre = data.name,
+      pokemon.imagen = data.sprites.front_default
+
+      
+      informacion.innerHTML = `<p>${pokemon.nombre}</p> <img src="${pokemon.imagen}" alt=""></img>`;
     })
     .catch(function (error) {
       alert("¡Error! Pokémon no encontrado");
     });
 }
+
 function saveFavorite() {
     
-  if (informacionPokemon === null) {
-    console.log("no hay datos guardatos");
+  if (Object.keys(pokemon).length === 0 ) {
+    alert("no hay pokemon para guardar");
+    return 
   }
-  if (localStorage.length == 0) {
-    let listaFavoritos = [];
-    listaFavoritos.push(informacionPokemon);
+  if(localStorage.getItem("pokemones_favoritos") == null) {
+    console.log("La lista de favorita esta vacia")
+    listaFavoritos = [];
+    listaFavoritos.push(pokemon);
+    localStorage.setItem("pokemones_favoritos", JSON.stringify(listaFavoritos));
 
-    return listaFavoritos;
-  } else {
-    localStorage.setItem("pokemon", JSON.stringify(informacionPokemon));
-
+  }else {
+    listaFavoritos = JSON.parse(localStorage.getItem("pokemones_favoritos"))
+    if (!listaFavoritos.includes(pokemon.nombre)){
+        listaFavoritos.push(pokemon);
+    }
   }
+   localStorage.setItem("pokemones_favoritos",JSON.stringify(listaFavoritos))
+   updateFavoritesList() 
 }
-
-botonGuardar.addEventListener("click", function() {
+botonGuardar.addEventListener("click", function(){
   saveFavorite();
 });
+
+function updateFavoritesList(){
+  let favoritos = JSON.parse(localStorage.getItem("pokemones_favoritos"))
+  divFavoritos.innerHTML = "";
+  let titulo = document.createElement("h1")
+  titulo.textContent="Favoritos";
+  divFavoritos.appendChild(titulo);
+  favoritos.forEach(function(elemento){
+    let divPokemon = document.createElement("div");
+    divPokemon.innerHTML = `<h2>${elemento.nombre}</h2><img src="${elemento.imagen}">`
+    divFavoritos.appendChild(divPokemon)
+  })
+}
+document.addEventListener("DOMContentLoaded", function(){
+  updateFavoritesList();
+})
